@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition><![CDATA[var answer = true;
+
+var rightNow = new GlideDateTime();
+var dayOfWeek = rightNow.getDayOfWeekLocalTime();
+
+if(dayOfWeek == 6 || dayOfWeek == 7) 
+	answer = false;
+
+
+answer;]]></condition>
+        <conditional>true</conditional>
+        <entered_time>1970-01-01 13:00:00</entered_time>
+        <name>Find Employees with special occasion today</name>
+        <run_as display_value="">udaykumar.billur@snc</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period/>
+        <run_start>2020-09-24 16:43:54</run_start>
+        <run_time>1970-01-01 18:00:00</run_time>
+        <run_type>on_demand</run_type>
+        <script><![CDATA[var month = rightNow.getMonthLocalTime();
+var day = rightNow.getDayOfMonthLocalTime();
+
+var occToday = new GlideRecord('x_snc_employee_spe_occasions');
+occToday.addQuery('occasion_month', '=', month);
+occToday.addQuery('occasion_day', '=', day);
+occToday.query();
+
+while(occToday.next()){
+	gs.info("Occasion record: " + occToday.number);
+}
+]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>udaykumar.billur@snc</sys_created_by>
+        <sys_created_on>2020-09-24 16:56:28</sys_created_on>
+        <sys_id>34188608dba350103677d8c75e961986</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Find Employees with special occasion today</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sysauto_script_34188608dba350103677d8c75e961986</sys_update_name>
+        <sys_updated_by>udaykumar.billur@snc</sys_updated_by>
+        <sys_updated_on>2020-09-24 16:56:28</sys_updated_on>
+        <time_zone>US/Eastern</time_zone>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>
